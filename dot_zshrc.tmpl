@@ -18,9 +18,13 @@ source ~/.zsh_plugins.sh
 
 # Alias
 alias ls='ls -F --color=always --group-directories-first'
-alias ll='ls -lah'
+alias ll='LC_COLLATE=C ls -lah'
 alias la='ls -CA'
+alias df='df -h'
+alias du='du -ch'
+alias grep='grep --color=auto'
 
+alias myip='curl ipinfo.io/ip'
 alias zsh-plugins-update='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
 
 # Env
