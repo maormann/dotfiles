@@ -1,0 +1,38 @@
+# Completion
+fpath=(~/.zsh/comp/ $fpath)
+autoload -U ~/.zsh/comp/*(:t)
+
+autoload -Uz compinit promptinit
+compinit
+promptinit
+
+setopt histignorealldups sharehistory
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+# Antibody Plugins
+source ~/.zsh_plugins.sh
+
+# Alias
+alias ls='ls -F --color=always --group-directories-first'
+alias ll='ls -lah'
+alias la='ls -CA'
+
+alias zsh-plugins-update='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
+
+# Env
+# Home bin
+\export PATH="${HOME}/bin:$PATH"
+
+{{- if eq .chezmoi.hostname "L380" }}
+# Anaconda
+if [ -f "${HOME}/anaconda3/etc/profile.d/conda.sh" ]; then
+  source "${HOME}/anaconda3/etc/profile.d/conda.sh"
+  CONDA_CHANGEPS1=false conda activate base
+else
+  \export PATH="${HOME}/anaconda3/bin:$PATH"
+fi
+{{- end }}
