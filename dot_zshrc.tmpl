@@ -1,6 +1,8 @@
 # Completion
-fpath=(~/.zsh/comp/ $fpath)
-autoload -U ~/.zsh/comp/*(:t)
+if [ -d ~/.zsh/comp/ ]; then
+  fpath=(~/.zsh/comp/ $fpath)
+  autoload -U ~/.zsh/comp/*(:t)
+fi
 
 autoload -Uz compinit promptinit
 compinit
