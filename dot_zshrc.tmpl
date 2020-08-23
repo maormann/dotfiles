@@ -15,6 +15,8 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
+setopt HIST_IGNORE_SPACE
+
 # Antibody Plugins
 source ~/.zsh_plugins.sh
 
@@ -30,15 +32,26 @@ alias myip='curl ipinfo.io/ip'
 alias zsh-plugins-update='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
 
 # Env
-# Home bin
-\export PATH="${HOME}/bin:$PATH"
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    \export PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    \export PATH="$HOME/.local/bin:$PATH"
+fi
+
+\export EDITOR=$(which nano)
 
 {{- if eq .chezmoi.hostname "L380" }}
+# L380
 # Anaconda
-if [ -f "${HOME}/anaconda3/etc/profile.d/conda.sh" ]; then
-  source "${HOME}/anaconda3/etc/profile.d/conda.sh"
+if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+  source "/opt/anaconda3/etc/profile.d/conda.sh"
   CONDA_CHANGEPS1=false conda activate base
-else
-  \export PATH="${HOME}/anaconda3/bin:$PATH"
 fi
+
+# Shadow 20.04 fix
+\export LIBVA_DRIVER_NAME=i965
 {{- end }}
