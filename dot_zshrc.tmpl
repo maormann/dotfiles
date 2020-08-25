@@ -1,8 +1,7 @@
 # Completion
-if [ -d ~/.zsh/comp/ ]; then
-  fpath=(~/.zsh/comp/ $fpath)
-  autoload -U ~/.zsh/comp/*(:t)
-fi
+[ -d ~/.zsh/completions/ ] \
+  && fpath=(~/.zsh/completions/ $fpath) \
+  && autoload -U ~/.zsh/completions/*(:t)
 
 autoload -Uz compinit promptinit
 compinit
@@ -30,27 +29,21 @@ alias grep='grep --color=auto'
 
 alias myip='curl ipinfo.io/ip'
 alias zsh-plugins-update='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
+alias wttr='printf "\e[8;41;125t" && curl -q -H "Accept-Language: de" wttr.in/Berlin'
 
 # Env
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    \export PATH="$HOME/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    \export PATH="$HOME/.local/bin:$PATH"
-fi
+[ -d "$HOME/bin" ] &&  \export PATH="$HOME/bin:$PATH"
+[ -d "$HOME/.local/bin" ] && \export PATH="$HOME/.local/bin:$PATH"
 
 \export EDITOR=$(which nano)
 
 {{- if eq .chezmoi.hostname "L380" }}
 # L380
 # Anaconda
-if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
-  source "/opt/anaconda3/etc/profile.d/conda.sh"
-  CONDA_CHANGEPS1=false conda activate base
-fi
+[ -f "/opt/anaconda3/etc/profile.d/conda.sh" ] \
+  && source "/opt/anaconda3/etc/profile.d/conda.sh" \
+  && CONDA_CHANGEPS1=false conda activate base
 
 # Shadow 20.04 fix
 \export LIBVA_DRIVER_NAME=i965
