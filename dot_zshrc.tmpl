@@ -30,6 +30,7 @@ alias grep='grep --color=auto'
 alias myip='curl ipinfo.io/ip'
 alias zsh-plugins-update='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
 alias wttr='printf "\e[8;41;125t" && curl -q -H "Accept-Language: de" wttr.in/Berlin'
+alias youtube-dl-music="youtube-dl --extract-audio --audio-format mp3 -o '%(title)s.%(ext)s'"
 
 # Env
 # set PATH so it includes user's private bin if it exists
