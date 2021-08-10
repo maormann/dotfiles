@@ -26,6 +26,7 @@ alias la='ls -CA'
 alias df='df -h'
 alias du='du -ch'
 alias grep='grep --color=auto'
+alias ip='ip --color'
 
 alias myip='curl ipinfo.io/ip'
 alias zsh-plugins-update='antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh'
@@ -38,6 +39,7 @@ alias youtube-dl-music="youtube-dl --extract-audio --audio-format mp3 -o '%(titl
 [ -d "$HOME/.local/bin" ] && \export PATH="$HOME/.local/bin:$PATH"
 
 \export EDITOR=$(which nano)
+[ -x `command -v go` ] && \export GOPATH=$(go env GOPATH)
 
 {{- if eq .chezmoi.hostname "L380" }}
 # L380
