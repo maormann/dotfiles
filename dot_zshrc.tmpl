@@ -39,7 +39,9 @@ alias youtube-dl-music="youtube-dl --extract-audio --audio-format mp3 -o '%(titl
 [ -d "$HOME/.local/bin" ] && \export PATH="$HOME/.local/bin:$PATH"
 
 \export EDITOR=$(which nano)
-[ -x `command -v go` ] && \export GOPATH=$(go env GOPATH)
+
+[ -d "/usr/local/go" ] && \export PATH=${PATH}:/usr/local/go/bin
+type go > /dev/null && \export GOPATH=$(go env GOPATH)
 
 {{- if eq .chezmoi.hostname "L380" }}
 # L380
